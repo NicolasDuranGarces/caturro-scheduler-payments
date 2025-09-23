@@ -1,0 +1,88 @@
+.shifts-page {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.shifts-page header p {
+  color: rgba(214, 205, 255, 0.62);
+}
+
+.error {
+  color: #fda4af;
+}
+
+.shift-actions {
+  display: grid;
+}
+
+.shift-card {
+  display: grid;
+  gap: 14px;
+  background: rgba(15, 17, 32, 0.82);
+  border: 1px solid rgba(168, 85, 247, 0.22);
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.shift-card.active {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(168, 85, 247, 0.15));
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.shift-card input,
+.shift-card textarea {
+  border-radius: 12px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  background: rgba(10, 11, 26, 0.9);
+  padding: 12px;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.shift-card textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.shift-card button {
+  width: fit-content;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.85), rgba(59, 130, 246, 0.8));
+}
+
+.shift-card.active button {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.85), rgba(248, 113, 113, 0.75));
+}
+
+.shift-history {
+  display: grid;
+  gap: 12px;
+}
+
+.shift-history article {
+  padding: 16px;
+  background: rgba(16, 18, 34, 0.85);
+  border-radius: 16px;
+  border: 1px solid rgba(168, 85, 247, 0.22);
+}
+
+.shift-history header {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(232, 228, 255, 0.85);
+}
+
+.shift-history p {
+  margin: 8px 0 0;
+  color: rgba(205, 198, 249, 0.7);
+}
+
+.shift-history .empty {
+  color: rgba(185, 176, 232, 0.55);
+}

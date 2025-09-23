@@ -1,0 +1,82 @@
+.team-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.team-page header {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.new-user {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px;
+  background: rgba(15, 15, 30, 0.82);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 16px;
+}
+
+.new-user input,
+.new-user select {
+  border-radius: 12px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  background: rgba(10, 11, 26, 0.9);
+  color: #fff;
+  padding: 10px 12px;
+}
+
+.new-user button {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.85), rgba(59, 130, 246, 0.82));
+  border-radius: 12px;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.error {
+  color: #fda4af;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.team-grid article {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(14, 16, 32, 0.82);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.team-grid header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.team-grid span {
+  color: rgba(199, 193, 245, 0.7);
+}
+
+.status-active {
+  color: #bbf7d0;
+}
+
+.status-inactive {
+  color: #fecaca;
+}
+
+@media (max-width: 980px) {
+  .new-user {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

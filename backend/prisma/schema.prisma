@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  BARISTA
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum ShiftStatus {
+  OPEN
+  CLOSED
+}
+
+model User {
+  id          Int             @id @default(autoincrement())
+  uuid        String          @unique @default(uuid())
+  email       String          @unique
+  password    String
+  firstName   String
+  lastName    String
+  role        Role            @default(BARISTA)
+  hourlyRate  Decimal         @db.Decimal(10, 2)
+  status      UserStatus      @default(ACTIVE)
+  notes       String?
+  shifts      Shift[]
+  schedules   ScheduleEntry[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model Shift {
+  id            Int        @id @default(autoincrement())
+  uuid          String     @unique @default(uuid())
+  userId        Int
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  openedAt      DateTime
+  closedAt      DateTime?
+  expectedEnd   DateTime?
+  status        ShiftStatus @default(OPEN)
+  hourlyRate    Decimal     @db.Decimal(10, 2)
+  minutesWorked Int?
+  payout        Decimal?    @db.Decimal(10, 2)
+  notes         String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model ScheduleEntry {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  title     String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  start     DateTime
+  end       DateTime
+  color     String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([start])
+  @@index([userId])
+}

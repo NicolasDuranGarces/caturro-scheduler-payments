@@ -13,6 +13,7 @@ frontend/.vite
 # Env overrides
 .env.local
 .env.*.local
+.env
 
 # Docker
 volumes

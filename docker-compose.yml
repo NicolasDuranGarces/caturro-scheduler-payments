@@ -43,6 +43,7 @@ services:
       BACKEND_PORT: ${BACKEND_PORT}
       DATABASE_URL: ${DATABASE_URL}
       NODE_ENV: production
+      TZ: America/Bogota
     expose:
       - "${BACKEND_PORT}"
     depends_on:
@@ -60,6 +61,7 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: America/Bogota
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -71,6 +73,7 @@ services:
       - mysql
     environment:
       ADMINER_DEFAULT_SERVER: mysql
+      TZ: America/Bogota
     expose:
       - "8080"
     networks:

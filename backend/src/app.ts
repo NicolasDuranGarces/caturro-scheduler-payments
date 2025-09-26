@@ -26,6 +26,12 @@ app.use('/api/users', userRoutes);
 app.use('/api/shifts', shiftRoutes);
 app.use('/api/schedule', scheduleRoutes);
 
+// Allow reverse proxies that strip the /api prefix
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/shifts', shiftRoutes);
+app.use('/schedule', scheduleRoutes);
+
 app.use(errorHandler);
 
 export default app;

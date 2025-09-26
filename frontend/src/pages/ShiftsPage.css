@@ -2,14 +2,20 @@
   display: flex;
   flex-direction: column;
   gap: 26px;
+  color: #0f172a;
+}
+
+.shifts-page header h1 {
+  margin: 0;
 }
 
 .shifts-page header p {
-  color: rgba(214, 205, 255, 0.62);
+  color: #475569;
+  margin: 6px 0 0;
 }
 
 .error {
-  color: #fda4af;
+  color: #dc2626;
 }
 
 .shift-actions {
@@ -19,24 +25,25 @@
 .shift-card {
   display: grid;
   gap: 14px;
-  background: rgba(15, 17, 32, 0.82);
-  border: 1px solid rgba(168, 85, 247, 0.22);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 18px;
   padding: 20px;
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
 }
 
 .shift-card.active {
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(168, 85, 247, 0.15));
-  border-color: rgba(34, 197, 94, 0.4);
+  border-color: #0ea5e9;
+  box-shadow: 0 22px 40px rgba(14, 165, 233, 0.12);
 }
 
 .shift-card input,
 .shift-card textarea {
   border-radius: 12px;
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  background: rgba(10, 11, 26, 0.9);
+  border: 1px solid #cbd5f5;
+  background: #f8fafc;
   padding: 12px;
-  color: #fff;
+  color: #0f172a;
   font-size: 0.95rem;
 }
 
@@ -51,13 +58,19 @@
   border-radius: 12px;
   border: none;
   font-weight: 600;
-  color: #fff;
+  color: #ffffff;
   cursor: pointer;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.85), rgba(59, 130, 246, 0.8));
+  background: #0ea5e9;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.shift-card button:hover {
+  box-shadow: 0 12px 24px rgba(14, 165, 233, 0.3);
+  transform: translateY(-1px);
 }
 
 .shift-card.active button {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.85), rgba(248, 113, 113, 0.75));
+  background: #ef4444;
 }
 
 .shift-history {
@@ -67,22 +80,23 @@
 
 .shift-history article {
   padding: 16px;
-  background: rgba(16, 18, 34, 0.85);
+  background: #ffffff;
   border-radius: 16px;
-  border: 1px solid rgba(168, 85, 247, 0.22);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
 }
 
 .shift-history header {
   display: flex;
   justify-content: space-between;
-  color: rgba(232, 228, 255, 0.85);
+  color: #0f172a;
 }
 
 .shift-history p {
   margin: 8px 0 0;
-  color: rgba(205, 198, 249, 0.7);
+  color: #475569;
 }
 
 .shift-history .empty {
-  color: rgba(185, 176, 232, 0.55);
+  color: #94a3b8;
 }

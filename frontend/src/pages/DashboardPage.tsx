@@ -106,7 +106,9 @@ const DashboardPage = () => {
       <section className="metrics">
         <article>
           <span>Pago semanal estimado</span>
-          <strong>${payrollThisWeek.toLocaleString('es-CO', { minimumFractionDigits: 0 })}</strong>
+          <strong>
+            ${payrollThisWeek.toLocaleString('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+          </strong>
           <small>Suma de turnos cerrados desde lunes</small>
         </article>
         <article>
@@ -123,7 +125,10 @@ const DashboardPage = () => {
           </strong>
           <small>
             {lastClosed?.payout
-              ? `Pagado $${Number(lastClosed.payout).toLocaleString('es-CO', { minimumFractionDigits: 0 })}`
+              ? `Pagado $${Number(lastClosed.payout).toLocaleString('es-CO', {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}`
               : 'Sin cierre reciente'}
           </small>
         </article>
@@ -142,7 +147,10 @@ const DashboardPage = () => {
             <h2>Turno en curso</h2>
             <p>
               Iniciado a las {format(parseISO(activeShift.openedAt), 'HH:mm', { locale: es })}. Cuando cierres enviaremos
-              el cálculo con tarifa de ${Number(user?.hourlyRate).toLocaleString('es-CO')} COP/h.
+              el cálculo con tarifa de ${Number(user?.hourlyRate).toLocaleString('es-CO', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              })} COP/h.
             </p>
           </div>
         ) : (

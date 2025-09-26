@@ -1,48 +1,95 @@
 .login-page {
-  width: 100%;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.35), transparent 55%),
-    radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.25), transparent 55%),
-    #05060f;
+  padding: clamp(24px, 5vw, 48px);
+  box-sizing: border-box;
+  background: #f5f6fa;
+}
+
+.login-shell {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: clamp(24px, 4vw, 48px);
+  width: min(1180px, 100%);
+  height: 100%;
+  align-items: stretch;
+}
+
+.login-hero {
+  display: none;
+}
+
+.hero-card {
+  border-radius: 24px;
+  padding: clamp(36px, 4vw, 56px);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+  display: grid;
+  row-gap: 20px;
+  align-content: start;
+  box-shadow: 0 36px 70px rgba(15, 23, 42, 0.12);
+}
+
+.hero-card img {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  background: #0f172a;
+  padding: 10px;
+}
+
+.hero-card h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  letter-spacing: 0.02em;
+  color: #111827;
+}
+
+.hero-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.hero-card ul {
+  margin: 0;
+  padding-left: 22px;
+  display: grid;
+  gap: 8px;
+  color: #1f2937;
 }
 
 .login-card {
-  width: min(420px, 92vw);
-  padding: 36px;
-  background: rgba(9, 11, 23, 0.85);
-  border: 1px solid rgba(168, 85, 247, 0.25);
+  padding: clamp(32px, 3vw, 48px);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 24px;
-  backdrop-filter: blur(18px);
-  box-shadow: 0 30px 60px rgba(6, 7, 16, 0.6);
+  box-shadow: 0 36px 70px rgba(15, 23, 42, 0.12);
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
 
 .login-card header {
-  display: flex;
-  gap: 18px;
+  display: grid;
+  gap: 12px;
 }
 
-.login-card header img {
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
-  border: 1px solid rgba(168, 85, 247, 0.35);
-}
-
-.login-card h1 {
+.login-card h2 {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: clamp(1.6rem, 3vw, 2rem);
   letter-spacing: 0.04em;
+  color: #0f172a;
 }
 
 .login-card p {
-  margin: 4px 0 0;
-  color: rgba(221, 215, 255, 0.7);
+  margin: 0;
+  color: #475569;
 }
 
 .login-card form {
@@ -55,38 +102,39 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  color: rgba(233, 228, 255, 0.8);
+  color: #1f2937;
 }
 
 .login-card input {
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(168, 85, 247, 0.18);
-  background: rgba(14, 16, 32, 0.85);
-  color: #f4f5ff;
+  border: 1px solid #cbd5f5;
+  background: #f8fafc;
+  color: #0f172a;
+  font-size: 1rem;
 }
 
 .login-card input:focus {
   outline: none;
-  border-color: rgba(168, 85, 247, 0.45);
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
 }
 
 .login-card button {
-  padding: 12px 14px;
+  padding: 14px 16px;
   border-radius: 14px;
   border: none;
   font-size: 1rem;
   font-weight: 600;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.85), rgba(59, 130, 246, 0.78));
-  color: #fff;
+  background: #0ea5e9;
+  color: #f8fafc;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .login-card button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(168, 85, 247, 0.28);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px rgba(14, 165, 233, 0.3);
 }
 
 .login-card button:disabled {
@@ -95,11 +143,46 @@
 }
 
 .login-card .error {
-  color: #fda4af;
+  color: #dc2626;
   margin: 0;
 }
 
 .login-card footer {
   text-align: center;
-  color: rgba(185, 178, 224, 0.55);
+  color: #64748b;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.16);
+  color: #0f172a;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 900px) {
+  .login-shell {
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 420px);
+    align-items: stretch;
+  }
+
+  .login-hero {
+    display: block;
+  }
+}
+
+@media (max-width: 640px) {
+  .login-page {
+    padding: 20px;
+  }
+
+  .login-card {
+    padding: 28px 24px;
+  }
 }

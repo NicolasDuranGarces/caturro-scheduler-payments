@@ -11,7 +11,7 @@ export interface AuthUser {
   hourlyRate: number | string;
 }
 
-interface AuthContextValue {
+export interface AuthContextValue {
   user: AuthUser | null;
   token: string | null;
   loading: boolean;

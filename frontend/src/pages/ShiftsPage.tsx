@@ -1,6 +1,4 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react';
-import { differenceInMinutes, format, parseISO } from 'date-fns';
-import { es } from 'date-fns/locale';
+import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { useApi } from '../hooks/useApi';
 import './ShiftsPage.css';
 
@@ -18,9 +16,42 @@ const ShiftsPage = () => {
   const api = useApi();
   const [shifts, setShifts] = useState<Shift[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [expectedEnd, setExpectedEnd] = useState('');
   const [notes, setNotes] = useState('');
   const [closingNotes, setClosingNotes] = useState('');
+
+  const getBogotaDate = useCallback(() => {
+    const now = new Date();
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/Bogota',
+      hour12: false,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+    const parts = formatter.formatToParts(now);
+    const get = (type: string) => Number(parts.find((part) => part.type === type)?.value ?? 0);
+    return new Date(Date.UTC(get('year'), get('month') - 1, get('day'), get('hour'), get('minute'), get('second')));
+  }, []);
+
+  const formatBogotaDate = useCallback((isoDate: string, options: Intl.DateTimeFormatOptions = {}) => {
+    return new Intl.DateTimeFormat('es-CO', {
+      dateStyle: undefined,
+      timeStyle: 'short',
+      timeZone: 'America/Bogota',
+      ...options,
+    }).format(new Date(isoDate));
+  }, []);
+
+  const formatBogotaDay = useCallback((isoDate: string) => {
+    return new Intl.DateTimeFormat('es-CO', {
+      day: 'numeric',
+      month: 'short',
+      timeZone: 'America/Bogota',
+    }).format(new Date(isoDate));
+  }, []);
 
   const loadShifts = async () => {
     const response = await api.get<Shift[]>('/shifts/mine');
@@ -40,10 +71,9 @@ const ShiftsPage = () => {
     setError(null);
     try {
       await api.post('/shifts/open', {
-        expectedEnd: expectedEnd ? new Date(expectedEnd).toISOString() : undefined,
+        openedAt: getBogotaDate().toISOString(),
         notes: notes || undefined,
       });
-      setExpectedEnd('');
       setNotes('');
       await loadShifts();
     } catch (err) {
@@ -79,8 +109,8 @@ const ShiftsPage = () => {
           <div className="shift-card active">
             <h2>Turno activo</h2>
             <p>
-              Abierto a las {format(parseISO(activeShift.openedAt), 'HH:mm', { locale: es })}. Tiempo en barra:{' '}
-              {differenceInMinutes(new Date(), parseISO(activeShift.openedAt))} minutos.
+              Turno iniciado a las {formatBogotaDate(activeShift.openedAt)} (hora Bogotá). Recuerda cerrar cuando
+              finalices.
             </p>
             <textarea
               placeholder="Notas para el cierre (opcional)"
@@ -94,12 +124,6 @@ const ShiftsPage = () => {
         ) : (
           <form onSubmit={handleOpenShift} className="shift-card">
             <h2>Iniciar turno</h2>
-            <input
-              type="datetime-local"
-              value={expectedEnd}
-              onChange={(event) => setExpectedEnd(event.target.value)}
-              placeholder="Hora estimada de cierre"
-            />
             <textarea
               placeholder="Notas (opcional)"
               value={notes}
@@ -117,14 +141,18 @@ const ShiftsPage = () => {
           {history.map((shift) => (
             <article key={shift.id}>
               <header>
-                <span>{format(parseISO(shift.openedAt), 'd MMM', { locale: es })}</span>
+                <span>{formatBogotaDay(shift.openedAt)}</span>
                 <strong>
-                  {format(parseISO(shift.openedAt), 'HH:mm')} · {shift.closedAt ? format(parseISO(shift.closedAt), 'HH:mm') : '—'}
+                  {formatBogotaDate(shift.openedAt)} ·{' '}
+                  {shift.closedAt ? formatBogotaDate(shift.closedAt) : '—'}
                 </strong>
               </header>
               <p>
-                Pago: ${Number(shift.payout ?? 0).toLocaleString('es-CO', { minimumFractionDigits: 0 })} ·{' '}
-                {Math.round((shift.minutesWorked ?? 0) / 60)} h
+                Pago: ${Number(shift.payout ?? 0).toLocaleString('es-CO', {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                })}{' '}
+                · {Math.round((shift.minutesWorked ?? 0) / 60)} h
               </p>
             </article>
           ))}

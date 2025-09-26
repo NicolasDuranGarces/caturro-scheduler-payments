@@ -7,7 +7,7 @@ const LoginPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('admin@caturro.cafe');
-  const [password, setPassword] = useState('changeme');
+  const [password, setPassword] = useState('PanteraCafe2024!');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -27,37 +27,55 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <div className="login-card">
-        <header>
-          <img src="/panther.svg" alt="Logo Caturro" />
-          <div>
-            <h1>Caturro Scheduler</h1>
-            <p>Controla turnos, equipo y pagos desde un solo lugar.</p>
+      <div className="login-shell">
+        <section className="login-hero">
+          <div className="hero-card">
+            <img src="/panther.svg" alt="Logo Caturro" />
+            <h1>Coordina el rugido del equipo</h1>
+            <p>
+              Controla turnos, aperturas y cierres con total visibilidad. Diseñado para el pulso creativo del Caturro
+              Café.
+            </p>
+            <ul>
+              <li>Calendario semanal interactivo</li>
+              <li>Pagos calculados al minuto</li>
+              <li>Roles claros para administradores y baristas</li>
+            </ul>
           </div>
-        </header>
+        </section>
 
-        <form onSubmit={handleSubmit}>
-          <label>
-            Correo
-            <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
-          </label>
-          <label>
-            Contraseña
-            <input
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              required
-            />
-          </label>
-          {error && <p className="error">{error}</p>}
-          <button type="submit" disabled={loading}>
-            {loading ? 'Entrando...' : 'Entrar'}
-          </button>
-        </form>
-        <footer>
-          <small>Universidad · Cultura underground · Pantera vigilante</small>
-        </footer>
+        <section className="login-card">
+          <header>
+            <div className="badge">Caturro Café</div>
+            <div>
+              <h2>Caturro Scheduler</h2>
+              <p>Controla turnos, equipo y pagos desde un solo lugar.</p>
+            </div>
+          </header>
+
+          <form onSubmit={handleSubmit}>
+            <label>
+              Correo
+              <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} required />
+            </label>
+            <label>
+              Contraseña
+              <input
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+              />
+            </label>
+            {error && <p className="error">{error}</p>}
+            <button type="submit" disabled={loading}>
+              {loading ? 'Entrando...' : 'Entrar'}
+            </button>
+          </form>
+          <footer>
+            <small>Turnos precisos · Pagos claros · Equipo sincronizado</small>
+          </footer>
+        </section>
       </div>
     </div>
   );

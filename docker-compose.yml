@@ -16,7 +16,7 @@ services:
     env_file:
       - .env
     ports:
-      - "${NGINX_HOST_PORT:-3100}:80"
+      - "${NGINX_HOST_PORT:-7050}:80"
     networks:
       - app_net
 
